@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {britishFlag, burgerMenu, namedLogo, logo, selectLanguageIcon} from 'assets'
-import {RegisterLoginSideDrawer} from 'components'
+import {SideBar} from 'components'
+import {SideDrawer} from 'components/UI'
 import {Button} from 'components/UI'
 import {showWindowAndBackdrop} from '../../redux'
 
@@ -77,7 +78,9 @@ const GetStartedPageHeader = (props) => {
           <MenuBurgerWrapper onClick={() => props.showWindowAndBackdropCmp()}>
             <MenuBurger src={burgerMenu}/>
           </MenuBurgerWrapper>
-          <RegisterLoginSideDrawer/>
+          <SideDrawer>
+            <SideBar activePage="getStartedPage"/>
+          </SideDrawer>
         </HeaderMinRight>
       </HeaderMin>
     </>

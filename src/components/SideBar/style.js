@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const SideBarWrapper = styled.div`
-  width: 9%;
+  width: 100%;
   height: 100vh;
   overflow-y: auto;
   border-right: 1px solid #D9D9D9;

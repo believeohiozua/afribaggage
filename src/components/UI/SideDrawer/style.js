@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const SideDrawerWrapper = styled.div`
-  width: 280px;
+  width: 200px;
   height: 100vh;
   overflow: auto;
   background: #ffffff;

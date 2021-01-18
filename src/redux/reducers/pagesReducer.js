@@ -10,7 +10,7 @@ import {
 } from '../actionTypes'
 
 const initialState = {
-  isTravellersPageActive: true,
+  isTravellersPageActive: false,
   isAirSharingPageActive: false,
   isContainerSharingPageActive: false,
   isNewsEventsPageActive: false,

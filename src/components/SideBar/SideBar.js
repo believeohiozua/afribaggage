@@ -22,7 +22,8 @@ import {
   showNewsEventsPage,
   showRegionPage,
   showResourcesPage,
-  showTravellersPage
+  showTravellersPage,
+  hideWindowAndBackdrop
 } from '../../redux'
 
 import {
@@ -34,11 +35,65 @@ import {
 } from './style'
 
 const SideBar = (props) => {
+  const travellersDeliveryHandler = () => {
+    if (props.activePage === 'getStartedPage') {
+      props.hideWindowAndBackdropCmp()
+    } else {
+      props.hideWindowAndBackdropCmp()
+      props.showTravellersPageCmp()
+    }
+  }
+
+  const airSharingHandler = () => {
+    if (props.activePage === 'getStartedPage') {
+      props.hideWindowAndBackdropCmp()
+    } else {
+      props.hideWindowAndBackdropCmp()
+      props.showAirSharingPageCmp()
+    }
+  }
+
+  const containerSharingHandler = () => {
+    if (props.activePage === 'getStartedPage') {
+      props.hideWindowAndBackdropCmp()
+    } else {
+      props.hideWindowAndBackdropCmp()
+      props.showContainerSharingPageCmp()
+    }
+  }
+
+  const newsEventsHandler = () => {
+    if (props.activePage === 'getStartedPage') {
+      props.hideWindowAndBackdropCmp()
+    } else {
+      props.hideWindowAndBackdropCmp()
+      props.showNewsEventsPageCmp()
+    }
+  }
+
+  const regionHandler = () => {
+    if (props.activePage === 'getStartedPage') {
+      props.hideWindowAndBackdropCmp()
+    } else {
+      props.hideWindowAndBackdropCmp()
+      props.showRegionPageCmp()
+    }
+  }
+
+  const resourcesHandler = () => {
+    if (props.activePage === 'getStartedPage') {
+      props.hideWindowAndBackdropCmp()
+    } else {
+      props.hideWindowAndBackdropCmp()
+      props.showResourcesPageCmp()
+    }
+  }
+
   return (
     <SideBarWrapper>
       <ItemWrapper
         isActive={props.isTravellersPageActive}
-        onClick={() => props.showTravellersPageCmp()}>
+        onClick={travellersDeliveryHandler}>
         <ItemContentWrapper>
           {props.isTravellersPageActive ? <Icon src={travellersDeliveryOrange}/> : <Icon src={travellersDelivery}/>}
           <ItemText isActive={props.isTravellersPageActive}>
@@ -48,7 +103,7 @@ const SideBar = (props) => {
       </ItemWrapper>
       <ItemWrapper
         isActive={props.isAirSharingPageActive}
-        onClick={() => props.showAirSharingPageCmp()}>
+        onClick={airSharingHandler}>
         <ItemContentWrapper>
           {props.isAirSharingPageActive ? <Icon src={airCargoSharingOrange}/> : <Icon src={airCargoSharing}/>}
           <ItemText isActive={props.isAirSharingPageActive}>
@@ -58,7 +113,7 @@ const SideBar = (props) => {
       </ItemWrapper>
       <ItemWrapper
         isActive={props.isContainerSharingPageActive}
-        onClick={() => props.showContainerSharingPageCmp()}>
+        onClick={containerSharingHandler}>
         <ItemContentWrapper>
           {props.isContainerSharingPageActive ? <Icon src={containerSharingOrange}/> : <Icon src={containerSharing}/>}
           <ItemText isActive={props.isContainerSharingPageActive}>
@@ -68,7 +123,7 @@ const SideBar = (props) => {
       </ItemWrapper>
       <ItemWrapper
         isActive={props.isNewsEventsPageActive}
-        onClick={() => props.showNewsEventsPageCmp()}>
+        onClick={newsEventsHandler}>
         <ItemContentWrapper>
           {props.isNewsEventsPageActive ? <Icon src={newsEventsOrange}/> : <Icon src={newsEvents}/>}
           <ItemText isActive={props.isNewsEventsPageActive}>
@@ -78,7 +133,7 @@ const SideBar = (props) => {
       </ItemWrapper>
       <ItemWrapper
         isActive={props.isRegionPageActive}
-        onClick={() => props.showRegionPageCmp()}>
+        onClick={regionHandler}>
         <ItemContentWrapper>
           {props.isRegionPageActive ? <Icon src={regionOrange}/> : <Icon src={region}/>}
           <ItemText isActive={props.isRegionPageActive}>
@@ -88,7 +143,7 @@ const SideBar = (props) => {
       </ItemWrapper>
       <ItemWrapper
         isActive={props.isResourcesPageActive}
-        onClick={() => props.showResourcesPageCmp()}>
+        onClick={resourcesHandler}>
         <ItemContentWrapper>
           {props.isResourcesPageActive ? <Icon src={resourcesOrange}/> : <Icon src={resources}/>}
           <ItemText isActive={props.isResourcesPageActive}>
@@ -118,7 +173,8 @@ const mapDispatchToProps = (dispatch) => {
     showContainerSharingPageCmp: () => dispatch(showContainerSharingPage()),
     showNewsEventsPageCmp: () => dispatch(showNewsEventsPage()),
     showRegionPageCmp: () => dispatch(showRegionPage()),
-    showResourcesPageCmp: () => dispatch(showResourcesPage())
+    showResourcesPageCmp: () => dispatch(showResourcesPage()),
+    hideWindowAndBackdropCmp: () => dispatch(hideWindowAndBackdrop())
   }
 }
 
