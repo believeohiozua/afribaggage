@@ -7,8 +7,7 @@ export const ButtonElem = styled.button`
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis;
-  padding: 0 13px;
-  
+   
   ${p => {
     switch (p.btnType) {
       case 'primary':
@@ -19,6 +18,7 @@ export const ButtonElem = styled.button`
           color: #ffffff;
           width: 100%;
           height: 100%;
+          padding: 0 13px;
         `
       case 'secondary':
         return `
@@ -29,8 +29,9 @@ export const ButtonElem = styled.button`
           font-weight: 600;
           width: 100%;
           height: 100%;
+          padding: 0 13px;
         `
-      case 'loginRegister': 
+      case 'getStarted': 
         return `
           background: #F05050;
           border: 1px solid #F05050;
@@ -40,6 +41,7 @@ export const ButtonElem = styled.button`
           width: 86px;
           width: 100%;
           height: 100%;
+          padding: 0 13px;
         `
       case 'blue':
         return `
@@ -48,6 +50,23 @@ export const ButtonElem = styled.button`
           color: #ffffff;
           padding: 11px;
           border: none;
+          text-transform: uppercase;
+        `
+      case 'bottomFixed':
+        return `
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          border: none; 
+          text-align: center;
+          background: #F05050;
+          color: #ffffff;
+          text-transform: uppercase;
+          letter-spacing: 0.03em;
+          height: 69px;
+          font-size: 18;
+          font-weight: 600;
         `
       default: 
         return ''

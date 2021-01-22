@@ -25,6 +25,7 @@ export const GetStartedPageHeaderWrapper = styled.div`
 export const LogoWrapper = styled.div`
   width: 67px;
   height: 40px;
+  cursor: pointer;
 `
 
 export const Logo = styled.img`

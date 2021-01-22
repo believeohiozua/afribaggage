@@ -1,0 +1,6 @@
+export {default as PhoneNumber} from './PhoneNumber'
+export {default as PhoneNumberVerification} from './PhoneNumberVerification'
+export {default as Name} from './Name'
+export {default as Gender} from './Gender'
+export {default as AvatarPassport} from './AvatarPassport'
+export {default as CropPhoto} from './CropPhoto'

@@ -22,10 +22,10 @@ import {
   CompanyHelpsWithIcon
 } from './style'
 
-const GetStartedPage = () => {
+const GetStartedPage = (props) => {
   return (
     <GetStartedPageWrapper>
-      <GetStartedPageHeader/>
+      <GetStartedPageHeader history={props.history}/>
       <CompanyInfoWrapper>
         <VideoWrapper>
           <Video src={videoImage}/>

@@ -18,5 +18,10 @@ export const checkValidity = (value, rules) => {
     isValid = pattern.test(value) && isValid
   }
 
+  if (rules.isPhoneNumber) {
+    const pattern = /^\+(?:[0-9]●?){6,14}[0-9]$/
+    isValid = pattern.test(value) && isValid
+  }
+
   return isValid
 }

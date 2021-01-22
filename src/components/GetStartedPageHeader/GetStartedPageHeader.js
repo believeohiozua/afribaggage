@@ -46,7 +46,8 @@ const GetStartedPageHeader = (props) => {
           <ButtonsWrapper>
             <ButtonWrapper>
               <Button
-                btnType="loginRegister">
+                btnType="getStarted"
+                onClick={() => props.history.push('/phone-number')}>
                 GET STARTED
               </Button>
             </ButtonWrapper>
@@ -72,7 +73,7 @@ const GetStartedPageHeader = (props) => {
           </SelectLangWrapper>
         </HeaderMinLeft>
         <HeaderMinRight>
-          <GetStartedButton>
+          <GetStartedButton onClick={() => props.history.push('/phone-number')}>
             GET STARTED
           </GetStartedButton>
           <MenuBurgerWrapper onClick={() => props.showWindowAndBackdropCmp()}>

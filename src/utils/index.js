@@ -1,2 +1,2 @@
-export * from './disabledButton'
+export * from './validForm'
 export * from './checkValidity'

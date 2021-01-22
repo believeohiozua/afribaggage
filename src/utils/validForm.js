@@ -1,41 +1,41 @@
-export const disabledButton = (controls) => {
+export const validForm = (controls) => {
   const form = []
   Object.values(controls).forEach(value => form.push(value))
 
-  let isButtonDisabled = true
-  let isDisabledTheCenter = true
-  let isDisabledTheStart = true
-  let isDisabledTheEnd = true
+  let isFormValid = false
+  let isValidTheCenter = false
+  let isValidTheStart = false
+  let isValidTheEnd = false
 
   form.forEach((item, index) => {
     if (form[index + 1] && form[index - 1]) {
       if (form[index].isValid && form[index + 1].isValid && form[index - 1].isValid) {
-        isDisabledTheCenter = false
+        isValidTheCenter = true
       } else {
-        isDisabledTheCenter = true
+        isValidTheCenter = false
       }
     } else {
-      isDisabledTheCenter = false
+      isValidTheCenter = true
     }
 
     if (!form[index - 1]) {
       if (form[index].isValid && form[index + 1].isValid) {
-        isDisabledTheStart = false
+        isValidTheStart = true
       } else {
-        isDisabledTheStart = true
+        isValidTheStart = false
       }
     }
 
     if (!form[index + 1]) {
       if (form[index].isValid && form[index - 1].isValid) {
-        isDisabledTheEnd = false
+        isValidTheEnd = true
       } else {
-        isDisabledTheEnd = true
+        isValidTheEnd = false
       }
     }
   })
 
-  isButtonDisabled = isDisabledTheStart || isDisabledTheCenter || isDisabledTheEnd
+  isFormValid = isValidTheStart && isValidTheCenter && isValidTheEnd
 
-  return isButtonDisabled
+  return isFormValid
 }

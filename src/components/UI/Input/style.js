@@ -28,8 +28,14 @@ export const Field = styled.input`
   font-size: 16px;
   font-weight: normal;
   border: 1px solid #B5C1CE;
-  border-radius: 5px;
+  border-radius: 8px;
   box-sizing: border-box;
+  
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+  }
   
   &::placeholder {
     color: #C7CFD3;
