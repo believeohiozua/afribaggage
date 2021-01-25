@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {AuthLayout} from 'layouts'
 import {forthLevelOfRegistration, setAvatar, setPassport} from 'assets'
-import {changePhotoScale, selectAvatar, selectPassport} from '../../../redux'
+import {changePhotoScale, selectAvatar} from '../../../redux'
 
 import {
   AvatarFieldWrapper,
@@ -17,24 +17,29 @@ import {
 
 const AvatarPassport = (props) => {
   const [isSubmitted, setIisSubmitted] = useState(false)
+  const [croppedAvatar, setCroppedAvatar] = useState('')
+  const [selectedPassport, setSelectedPassport] = useState('')
 
   useEffect(() => {
     const registrationData = JSON.parse(localStorage.getItem('registrationData'))
     if (!registrationData) {
       props.history.push('/phone-number')
+    } else {
+      setCroppedAvatar(registrationData.avatar)
+      setSelectedPassport(registrationData.passport)
     }
   })
 
   const changeHandler = (event) => {
     const file = event.target.files[0]
     const inputId = event.target.id
+    const registrationData = JSON.parse(localStorage.getItem('registrationData'))
 
     if (file) {
       const reader = new FileReader()
       if (inputId === 'avatar') {
         reader.onload = async (event) => {
           props.selectAvatarCmp(event.target.result)
-          props.selectPassportCmp('')
           props.changePhotoScaleCmp(1.5)
           if (event.target.result) {
             props.history.push('/crop-photo')
@@ -42,12 +47,9 @@ const AvatarPassport = (props) => {
         }
       } else if (inputId === 'passport') {
         reader.onload = (event) => {
-          props.selectPassportCmp(event.target.result)
-          props.selectAvatarCmp('')
-          props.changePhotoScaleCmp(1.5)
-          if (event.target.result) {
-            props.history.push('/crop-photo')
-          }
+          registrationData.passport = event.target.result
+          setSelectedPassport(registrationData.passport)
+          localStorage.setItem('registrationData', JSON.stringify(registrationData))
         }
       }
 
@@ -56,14 +58,13 @@ const AvatarPassport = (props) => {
   }
 
   const submitHandler = () => {
-    if (props.croppedAvatar && props.croppedPassport) {
+    if (croppedAvatar && selectedPassport) {
       setIisSubmitted(true)
       const registrationData = JSON.parse(localStorage.getItem('registrationData'))
-      registrationData.avatar = props.croppedAvatar
-      registrationData.passport = props.croppedPassport
       console.log('Registration data', registrationData)
       localStorage.setItem('registrationData', JSON.stringify(registrationData))
-      // localStorage.removeItem('registrationData')
+      localStorage.removeItem('registrationData')
+      props.history.push('/login-phone-number')
     } else {
       setIisSubmitted(true)
     }
@@ -85,8 +86,8 @@ const AvatarPassport = (props) => {
           multiple
           accept="image/*"
           onChange={changeHandler}/>
-        <Label htmlFor="avatar" croppedAvatar={props.croppedAvatar}>
-          {!props.croppedAvatar ? (
+        <Label htmlFor="avatar" photo={croppedAvatar}>
+          {!croppedAvatar ? (
             <>
               <PhotoImg src={setAvatar}/>
               <Action>Set avatar</Action>
@@ -95,7 +96,7 @@ const AvatarPassport = (props) => {
           <AddButton>+</AddButton>
         </Label>
         <ErrorMessage
-          isAvatarErrorVisible={!props.croppedAvatar && isSubmitted}>
+          isAvatarErrorVisible={!croppedAvatar && isSubmitted}>
           Choose the photo</ErrorMessage>
       </AvatarFieldWrapper>
       <PassportFieldWrapper>
@@ -105,8 +106,8 @@ const AvatarPassport = (props) => {
           multiple
           accept="image/*"
           onChange={changeHandler}/>
-        <Label htmlFor="passport" croppedAvatar={props.croppedPassport}>
-          {!props.croppedPassport ? (
+        <Label htmlFor="passport" photo={selectedPassport}>
+          {!selectedPassport ? (
             <>
               <PhotoImg src={setPassport}/>
               <Action>Passport</Action>
@@ -115,26 +116,18 @@ const AvatarPassport = (props) => {
           <AddButton>+</AddButton>
         </Label>
         <ErrorMessage
-          isPassportErrorVisible={!props.croppedPassport && isSubmitted}>
+          isPassportErrorVisible={!selectedPassport && isSubmitted}>
           Choose the photo</ErrorMessage>
       </PassportFieldWrapper>
     </AuthLayout>
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    croppedAvatar: state.cropPhoto.croppedAvatar,
-    croppedPassport: state.cropPhoto.croppedPassport
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     selectAvatarCmp: (selectedPhoto) => dispatch(selectAvatar(selectedPhoto)),
-    selectPassportCmp: (selectedPhoto) => dispatch(selectPassport(selectedPhoto)),
     changePhotoScaleCmp: (scale) => dispatch(changePhotoScale(scale))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AvatarPassport)
+export default connect(null, mapDispatchToProps)(AvatarPassport)

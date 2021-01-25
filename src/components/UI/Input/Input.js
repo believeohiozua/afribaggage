@@ -11,7 +11,7 @@ import {
 
 const Input = (props) => {
   return (
-    <InputWrapper width={props.width}>
+    <InputWrapper width={props.width} style={props.style}>
       <Label>
         {props.label}
       </Label>

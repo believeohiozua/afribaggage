@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Input} from 'components/UI'
 import {AuthLayout} from 'layouts'
 import {firstLevelOfRegistration} from 'assets'
 import {checkValidity} from 'utils'
 
 const PhoneNumber = (props) => {
+  const registrationData = JSON.parse(localStorage.getItem('registrationData'))
   const [phoneNumberControl, setPhoneNumberControl] = useState({
     value: '',
     isValid: false,
@@ -15,6 +16,16 @@ const PhoneNumber = (props) => {
       isPhoneNumber: true
     }
   })
+
+  useEffect(() => {
+    if (registrationData) {
+      if (registrationData.phoneNumber) {
+        const field = {...phoneNumberControl}
+        field.value = registrationData.phoneNumber
+        setPhoneNumberControl(field)
+      }
+    }
+  }, [])
 
   const changeHandler = (event) => {
     const control = {...phoneNumberControl}
@@ -65,6 +76,21 @@ const PhoneNumber = (props) => {
     if (control.isValid) {
       const formData = {}
       formData.phoneNumber = '+' + control.value.replace(/[^\d]/g, '')
+
+      if (registrationData) {
+        if (registrationData.name) {
+          formData.name = registrationData.name
+        }
+        if (registrationData.gender) {
+          formData.gender = registrationData.gender
+        }
+        if (registrationData.avatar) {
+          formData.avatar = registrationData.avatar
+        }
+        if (registrationData.passport) {
+          formData.passport = registrationData.passport
+        }
+      }
 
       localStorage.setItem('registrationData', JSON.stringify(formData))
 

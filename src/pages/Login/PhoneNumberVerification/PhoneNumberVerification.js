@@ -1,6 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
 import {AuthLayout} from 'layouts'
-import {firstLevelOfRegistration} from 'assets'
 import {validForm} from 'utils'
 
 import {CodeFieldsWrapper, CodeField, ErrorMessage} from './style'
@@ -41,9 +40,9 @@ const PhoneNumberVerification = (props) => {
   })
 
   useEffect(() => {
-    const registrationData = JSON.parse(localStorage.getItem('registrationData'))
-    if (!registrationData) {
-      props.history.push('/phone-number')
+    const loginData = JSON.parse(localStorage.getItem('loginData'))
+    if (!loginData) {
+      props.history.push('/login-phone-number')
     }
   })
 
@@ -103,7 +102,9 @@ const PhoneNumberVerification = (props) => {
 
       setControls(fields)
 
-      props.history.push('/name')
+      localStorage.removeItem('loginData')
+
+      // props.history.push('/name')
     } else {
       setIsFormSubmitted(true)
     }
@@ -112,13 +113,11 @@ const PhoneNumberVerification = (props) => {
   return (
     <AuthLayout
       history={props.history}
-      register
       pageAction="Code Verification"
-      registerLevel={firstLevelOfRegistration}
-      comeBackPage="/phone-number"
+      comeBackPage="/login-phone-number"
       submitAction="continue"
       submitHandler={submitHandler}>
-      <CodeFieldsWrapper>
+      <CodeFieldsWrapper style={{marginTop: '65px'}}>
         <CodeField
           ref={firstCodeNumber}
           type="number"

@@ -21,8 +21,12 @@ const Name = (props) => {
     const registrationData = JSON.parse(localStorage.getItem('registrationData'))
     if (!registrationData) {
       props.history.push('/phone-number')
+    } else if (registrationData.name) {
+      const field = {...nameControl}
+      field.value = registrationData.name
+      setNameControl(field)
     }
-  })
+  }, [])
 
   const changeHandler = (event) => {
     const control = {...nameControl}

@@ -1,8 +1,6 @@
 import {
   SELECT_AVATAR,
   CROP_AVATAR,
-  SELECT_PASSPORT,
-  CROP_PASSPORT,
   CHANGE_PHOTO_SCALE
 } from '../actionTypes'
 
@@ -17,20 +15,6 @@ export const cropAvatar = (croppedAvatar) => {
   return {
     type: CROP_AVATAR,
     payload: croppedAvatar
-  }
-}
-
-export const selectPassport = (selectedPassport) => {
-  return {
-    type: SELECT_PASSPORT,
-    payload: selectedPassport
-  }
-}
-
-export const cropPassport = (croppedPassport) => {
-  return {
-    type: CROP_PASSPORT,
-    payload: croppedPassport
   }
 }
 

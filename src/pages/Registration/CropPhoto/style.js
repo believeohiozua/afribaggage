@@ -28,40 +28,30 @@ export const RangeLabel = styled.label`
 
 export const InputRange = styled.input`
   width: 100%;  
-  //margin: 18px 0;
-  //transition: 1s;
+  margin: 18px 0;
+  appearance: none;
 
-  //&:focus {
-  //  outline: none;
-  //}
-  //
-  //&::-webkit-slider-runnable-track {
-  //  width: 100%;
-  //  height: 8.4px;
-  //  cursor: pointer;
-  //  background: #F05050;
-  //  border-radius: 1.3px;
-  //}
-  //
-  //&::-webkit-slider-thumb {
-  //  height: 16px;
-  //  width: 16px;
-  //  border-radius: 50%;
-  //  background: #F05050;
-  //  cursor: pointer;
-  //  -webkit-appearance: none;
-  //  margin-top: -4px;
-  //}
-  //
-  //&:focus::-webkit-slider-runnable-track {
-  //  background: #367ebd;
-  //}
-  //
-  //&:focus::-ms-fill-lower {
-  //  background: #3071a9;
-  //}
-  //
-  //&:focus::-ms-fill-upper {
-  //  background: #367ebd;
-  //}
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    background: #CACACA;
+    border-radius: 5px;
+  }
+
+  &::-webkit-slider-thumb {
+    height: 21px;
+    width: 21px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 2px solid #F05050;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px;
+  }
 `

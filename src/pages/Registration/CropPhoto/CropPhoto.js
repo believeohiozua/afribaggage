@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import AvatarEditor from 'react-avatar-editor'
 import {Button} from 'components/UI'
-import {cropAvatar, cropPassport, changePhotoScale} from '../../../redux'
+import {cropAvatar, changePhotoScale} from '../../../redux'
 
 import {
   Title,
@@ -18,25 +18,22 @@ const CropPhoto = (props) => {
   const setEditorRef = (editor) => avatarEditor = editor
 
   useEffect(() => {
-    if (props.selectedAvatar === '' && props.selectedPassport === '') {
+    if (props.selectedAvatar === '') {
       props.history.push('/avatar-passport')
     }
   })
 
-  const setAvatarImage = () => {
+  const cropPhoto = () => {
     if (avatarEditor) {
       const canvasScaledUrl = avatarEditor.getImage().toDataURL()
-      if (props.selectedAvatar) {
-        props.cropAvatarCmp(canvasScaledUrl)
-      } else {
-        props.cropPassportCmp(canvasScaledUrl)
-      }
-
+      const registrationData = JSON.parse(localStorage.getItem('registrationData'))
+      registrationData.avatar = canvasScaledUrl
+      localStorage.setItem('registrationData', JSON.stringify(registrationData))
       props.history.push('/avatar-passport')
     }
   }
 
-  const avatarRangeChange = (event) => {
+  const rangeChange = (event) => {
     const inputValue = event.target.value
     const photoScale = inputValue / 100 + 1
     props.changePhotoScaleCmp(photoScale)
@@ -48,7 +45,7 @@ const CropPhoto = (props) => {
       <AvatarEditorWrapper>
         <AvatarEditor
           ref={setEditorRef}
-          image={props.selectedAvatar || props.selectedPassport}
+          image={props.selectedAvatar}
           width={200}
           height={200}
           border={27}
@@ -63,9 +60,9 @@ const CropPhoto = (props) => {
           defaultValue={50}
           min={0}
           max={100}
-          onChange={avatarRangeChange}/>
+          onChange={rangeChange}/>
       </ScaleRangeWrapper>
-      <Button btnType="bottomFixed" onClick={setAvatarImage}>
+      <Button btnType="bottomFixed" onClick={cropPhoto}>
         Save
       </Button>
     </PhotoEditorWrapper>
@@ -75,7 +72,6 @@ const CropPhoto = (props) => {
 const mapStateToProps = (state) => {
   return {
     selectedAvatar: state.cropPhoto.selectedAvatar,
-    selectedPassport: state.cropPhoto.selectedPassport,
     photoScale: state.cropPhoto.photoScale
   }
 }
@@ -83,7 +79,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     cropAvatarCmp: (croppedPhoto) => dispatch(cropAvatar(croppedPhoto)),
-    cropPassportCmp: (croppedPhoto) => dispatch(cropPassport(croppedPhoto)),
     changePhotoScaleCmp: (scale) => dispatch(changePhotoScale(scale))
   }
 }

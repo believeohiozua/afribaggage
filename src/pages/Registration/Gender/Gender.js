@@ -6,13 +6,15 @@ import {GenderSelect, Option} from './style'
 
 const Gender = (props) => {
   const [selectedItem, setSelectedItem] = useState('male')
+  const registrationData = JSON.parse(localStorage.getItem('registrationData'))
 
   useEffect(() => {
-    const registrationData = JSON.parse(localStorage.getItem('registrationData'))
     if (!registrationData) {
       props.history.push('/phone-number')
+    } else if (registrationData.gender) {
+      setSelectedItem(registrationData.gender)
     }
-  })
+  }, [registrationData.gender])
 
   const changeHandler = () => {
     if (selectedItem === 'male') {
@@ -41,6 +43,7 @@ const Gender = (props) => {
       submitHandler={submitHandler}>
       <GenderSelect
         selectedItem={selectedItem}
+        value={selectedItem}
         onChange={changeHandler}>
         <Option value="male">Male</Option>
         <Option value="female">Female</Option>

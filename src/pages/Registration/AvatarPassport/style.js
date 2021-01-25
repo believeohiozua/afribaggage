@@ -23,7 +23,7 @@ export const Label = styled.label`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  background: ${p => p.croppedAvatar ? `url('${p.croppedAvatar}') no-repeat 0 0/cover` : 'transparent'};
+  background: ${p => p.photo ? `url('${p.photo}') no-repeat 0 0/cover` : 'transparent'};
 `
 
 export const PhotoImg = styled.img`

@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import {Input} from 'components/UI'
 import {AuthLayout} from 'layouts'
-import {firstLevelOfRegistration} from 'assets'
 import {checkValidity} from 'utils'
 
 const PhoneNumber = (props) => {
-  const registrationData = JSON.parse(localStorage.getItem('registrationData'))
+  const loginData = JSON.parse(localStorage.getItem('loginData'))
   const [phoneNumberControl, setPhoneNumberControl] = useState({
     value: '',
     isValid: false,
@@ -18,10 +17,11 @@ const PhoneNumber = (props) => {
   })
 
   useEffect(() => {
-    if (registrationData) {
-      if (registrationData.phoneNumber) {
+    if (loginData) {
+      if (loginData.phoneNumber) {
+        console.log(loginData.phoneNumber)
         const field = {...phoneNumberControl}
-        field.value = registrationData.phoneNumber
+        field.value = loginData.phoneNumber
         setPhoneNumberControl(field)
       }
     }
@@ -77,28 +77,13 @@ const PhoneNumber = (props) => {
       const formData = {}
       formData.phoneNumber = '+' + control.value.replace(/[^\d]/g, '')
 
-      if (registrationData) {
-        if (registrationData.name) {
-          formData.name = registrationData.name
-        }
-        if (registrationData.gender) {
-          formData.gender = registrationData.gender
-        }
-        if (registrationData.avatar) {
-          formData.avatar = registrationData.avatar
-        }
-        if (registrationData.passport) {
-          formData.passport = registrationData.passport
-        }
-      }
-
-      localStorage.setItem('registrationData', JSON.stringify(formData))
+      localStorage.setItem('loginData', JSON.stringify(formData))
 
       control.value = ''
       control.isValid = false
       control.isTouched = false
       control.errorMessage = 'Fill in the field'
-      props.history.push('/phone-number-verification')
+      props.history.push('/login-phone-number-verification')
     }
 
     setPhoneNumberControl(control)
@@ -107,16 +92,15 @@ const PhoneNumber = (props) => {
   return (
     <AuthLayout
       history={props.history}
-      register
-      pageAction="Registration"
-      registerLevel={firstLevelOfRegistration}
-      comeBackPage="/"
+      pageAction="Log In"
+      comeBackPage="/avatar-passport"
       submitAction="continue"
       submitHandler={submitHandler}>
       <Input
         type="tel"
-        label="What is your phone number?"
+        label="Phone number"
         height="45px"
+        style={{marginTop: '10px'}}
         placeholder="+1 569 926 53 35"
         value={phoneNumberControl.value}
         isValid={phoneNumberControl.isValid}
