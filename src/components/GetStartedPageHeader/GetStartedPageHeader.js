@@ -4,7 +4,7 @@ import {britishFlag, burgerMenu, namedLogo, logo, selectLanguageIcon} from 'asse
 import {SideBar} from 'components'
 import {SideDrawer} from 'components/UI'
 import {Button} from 'components/UI'
-import {showWindowAndBackdrop} from '../../redux'
+import {showWindowAndBackdrop, hideWindowAndBackdrop} from '../../redux'
 
 import {
   ButtonsWrapper,
@@ -76,7 +76,9 @@ const GetStartedPageHeader = (props) => {
           <GetStartedButton onClick={() => props.history.push('/phone-number')}>
             GET STARTED
           </GetStartedButton>
-          <MenuBurgerWrapper onClick={() => props.showWindowAndBackdropCmp()}>
+          <MenuBurgerWrapper
+            onClick={() => !props.isWindowOpen ? props.showWindowAndBackdropCmp()
+                : props.hideWindowAndBackdropCmp()}>
             <MenuBurger src={burgerMenu}/>
           </MenuBurgerWrapper>
           <SideDrawer>
@@ -88,10 +90,17 @@ const GetStartedPageHeader = (props) => {
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    showWindowAndBackdropCmp: () => dispatch(showWindowAndBackdrop())
+    isWindowOpen: state.overlay.isWindowOpen
   }
 }
 
-export default connect(null, mapDispatchToProps)(GetStartedPageHeader)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showWindowAndBackdropCmp: () => dispatch(showWindowAndBackdrop()),
+    hideWindowAndBackdropCmp: () => dispatch(hideWindowAndBackdrop())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GetStartedPageHeader)

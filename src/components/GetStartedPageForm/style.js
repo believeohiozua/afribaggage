@@ -2,19 +2,23 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
 export const GetStartedPageFormWrapper = styled.div`
-  width: 520px;
+  width: 820px;
   max-width: 82%;
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.03);
-  margin: 0 auto 138px;
+  margin: 0 auto 30px;
   padding: 20px 30px;
   border: 1px solid #C6D2DE;
+  box-sizing: border-box;
+  
+  @media screen and (max-width: 855px) {
+    width: 360px;
+    max-width: 73%;
+  }
   
   @media screen and (max-width: 582px) {
-    width: 327px;
-    max-width: 73%;
-    margin-bottom: 42px;
+    max-width: 90%;
   }
 `
 
@@ -23,7 +27,7 @@ export const FormHeader = styled.div`
   align-items: center;
   margin-bottom: 30px;
   
-  @media screen and (max-width: 582px) {
+  @media screen and (max-width: 855px) {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -33,6 +37,10 @@ export const Title = styled.h2`
   font-size: 24px;
   font-weight: 600;
   margin-right: 30px;
+  
+  @media screen and (max-width: 855px) {
+    font-size: 20px;
+  }
   
   @media screen and (max-width: 582px) {
     font-size: 16px;
@@ -63,26 +71,24 @@ export const Form = styled.form`
   justify-content: space-between;
   align-items: center;
   
-  @media screen and (max-width: 582px) {
+  @media screen and (max-width: 855px) {
     flex-direction: column;
   }
 `
 
 export const InputWrapper = styled.div`
-  width: 75%;
+  margin-right: 20px;
+  box-sizing: border-box;
   
-  @media screen and (max-width: 841px) {
-    //width: 37%;
-  }
-  
-  @media screen and (max-width: 582px) {
+  @media screen and (max-width: 855px) {
     width: 100%;
     height: 80px;
+    margin-right: 0;
   }
 `
 
 export const ButtonWrapper = styled.div`
-  width: 20%;
+  //width: 11.5%;
   height: 45px;
   position: relative;
   top: 7px;
@@ -91,7 +97,7 @@ export const ButtonWrapper = styled.div`
     width: 20%;
   }
   
-  @media screen and (max-width: 582px) {
+  @media screen and (max-width: 855px) {
     width: 100%;
     top: 0;
     margin-top: 20px;

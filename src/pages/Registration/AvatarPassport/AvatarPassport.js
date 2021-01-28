@@ -28,7 +28,7 @@ const AvatarPassport = (props) => {
       setCroppedAvatar(registrationData.avatar)
       setSelectedPassport(registrationData.passport)
     }
-  })
+  }, [props.history])
 
   const changeHandler = (event) => {
     const file = event.target.files[0]

@@ -1,52 +1,89 @@
 import React from 'react'
-import {namedLogo} from 'assets'
+import {connect} from 'react-redux'
 
 import {
-  FooterWrapper,
-  LinksWrapper,
-  LeftLinksWrapper,
-  Nav,
-  RightLinksWrapper,
-  ContactsInfo,
-  Email,
+  facebookIcon,
+  instagramIcon,
+  namedLogo,
+  telegramIcon,
+  twitterIcon,
+  footerEmailIcon,
+  footerLocationIcon,
+  footerPhoneIcon
+} from 'assets'
+
+import {
   Address,
+  ContactsInfo,
+  ContactsInfoMini,
+  Email,
+  FooterWrapper,
+  LeftLinksWrapper,
+  LinksWrapper,
+  Logo,
+  LogoSocietiesWrapper,
+  Nav,
   PhoneNumber,
-  ExtraInfoWrapper,
-  ExtraInfo,
-  LogoWrapper,
-  Logo
+  RightLinksWrapper,
+  Societies,
+  SocietyImage,
+  SocietyLink,
+  FooterRow,
+  Icon
 } from './style'
 
-const GetStartedPageFooter = () => {
+const GetStartedPageFooter = (props) => {
   return (
-    <FooterWrapper>
-      <LinksWrapper>
-        <LeftLinksWrapper>
-          <Nav to="#!">About</Nav>
-          <Nav to="#!">Contact us</Nav>
-          <Nav to="#!">Resources</Nav>
-        </LeftLinksWrapper>
-        <RightLinksWrapper>
-          <Nav to="#!">Transport</Nav>
-          <Nav to="#!">Advertise</Nav>
-          <Nav to="#!">Terms of Use</Nav>
-        </RightLinksWrapper>
-      </LinksWrapper>
-      <ContactsInfo>
-        <Email>help@afribaggage.com</Email>
-        <Address>Lagos, High street 68</Address>
-        <PhoneNumber>+234 626 623 73 26</PhoneNumber>
-      </ContactsInfo>
-      <ExtraInfoWrapper>
-        <ExtraInfo>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-        </ExtraInfo>
-      </ExtraInfoWrapper>
-      <LogoWrapper>
-        <Logo src={namedLogo}/>
-      </LogoWrapper>
+    <FooterWrapper isWindowOpen={props.isWindowOpen}>
+      <FooterRow>
+        <LinksWrapper>
+          <LeftLinksWrapper>
+            <Nav to="#!">About</Nav>
+            <Nav to="#!">Contact us</Nav>
+            <Nav to="#!">Resources</Nav>
+          </LeftLinksWrapper>
+          <RightLinksWrapper>
+            <Nav to="#!">Transport</Nav>
+            <Nav to="#!">Advertise</Nav>
+            <Nav to="#!">Terms of Use</Nav>
+          </RightLinksWrapper>
+        </LinksWrapper>
+        <ContactsInfo>
+          <Email>help@afribaggage.com</Email>
+          <Address>Lagos, High street 68</Address>
+          <PhoneNumber>+234 626 623 73 26</PhoneNumber>
+        </ContactsInfo>
+        <LogoSocietiesWrapper>
+          <Logo src={namedLogo}/>
+          <Societies>
+            <SocietyLink href="#!">
+              <SocietyImage src={facebookIcon}/>
+            </SocietyLink>
+            <SocietyLink href="#!">
+              <SocietyImage src={telegramIcon}/>
+            </SocietyLink>
+            <SocietyLink href="#!">
+              <SocietyImage src={twitterIcon}/>
+            </SocietyLink>
+            <SocietyLink href="#!">
+              <SocietyImage src={instagramIcon}/>
+            </SocietyLink>
+          </Societies>
+        </LogoSocietiesWrapper>
+      </FooterRow>
+      <ContactsInfoMini>
+        <Email><Icon src={footerEmailIcon}/> help@afribaggage.com</Email>
+        <Address><Icon src={footerLocationIcon}/> Lagos, High street 68</Address>
+        <PhoneNumber><Icon src={footerPhoneIcon}/> +234 626 623 73 26</PhoneNumber>
+      </ContactsInfoMini>
     </FooterWrapper>
   )
 }
 
-export default GetStartedPageFooter
+const mapStateToProps = (state) => {
+  return {
+    isWindowOpen: state.overlay.isWindowOpen
+  }
+}
+
+export default connect(mapStateToProps)(GetStartedPageFooter)

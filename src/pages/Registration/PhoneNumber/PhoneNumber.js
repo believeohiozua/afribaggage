@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import {Input} from 'components/UI'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 import {AuthLayout} from 'layouts'
 import {firstLevelOfRegistration} from 'assets'
-import {checkValidity} from 'utils'
+import './phoneNumberCustomise.css'
+
+import {InputWrapper, ErrorMessage} from './style'
 
 const PhoneNumber = (props) => {
   const registrationData = JSON.parse(localStorage.getItem('registrationData'))
@@ -10,11 +13,7 @@ const PhoneNumber = (props) => {
     value: '',
     isValid: false,
     isTouched: false,
-    errorMessage: 'Fill in the field',
-    rules: {
-      required: true,
-      isPhoneNumber: true
-    }
+    errorMessage: 'Fill in the field'
   })
 
   useEffect(() => {
@@ -27,28 +26,13 @@ const PhoneNumber = (props) => {
     }
   }, [])
 
-  const changeHandler = (event) => {
+  const changeHandler = (value, country, e, formattedValue) => {
     const control = {...phoneNumberControl}
 
-    control.value = event.target.value
+    control.value = formattedValue
+    control.isValid = control.value.length === country.format.length
 
-    let number
-
-    if (control.value[0] === '+') {
-      number = '+' + control.value.replace(/[^\d]/g, '')
-    } else {
-      number = control.value.replace(/[^\d]/g, '')
-    }
-
-    control.isValid = checkValidity(number.trim(), control.rules)
-
-    if (!control.isValid) {
-      if (control.value.length > 0) {
-        control.errorMessage = 'Write number in +1 345 567 format'
-      } else {
-        control.errorMessage = 'Fill in the field'
-      }
-    }
+    console.log(control.isValid)
 
     setPhoneNumberControl(control)
   }
@@ -56,27 +40,8 @@ const PhoneNumber = (props) => {
   const submitHandler = () => {
     const control = {...phoneNumberControl}
 
-    let number
-
-    if (control.value[0] === '+') {
-      number = '+' + control.value.replace(/[^\d]/g, '')
-    } else {
-      number = control.value.replace(/[^\d]/g, '')
-    }
-
-    control.isValid = checkValidity(number.trim(), control.rules)
-    control.isTouched = true
-
-    if (control.value.length > 0) {
-      control.errorMessage = 'Write number in +1 345 567 format'
-    } else {
-      control.errorMessage = 'Fill in the field'
-    }
-
     if (control.isValid) {
       const formData = {}
-      formData.phoneNumber = '+' + control.value.replace(/[^\d]/g, '')
-
       if (registrationData) {
         if (registrationData.name) {
           formData.name = registrationData.name
@@ -98,7 +63,7 @@ const PhoneNumber = (props) => {
       control.isValid = false
       control.isTouched = false
       control.errorMessage = 'Fill in the field'
-      props.history.push('/phone-number-verification')
+      // props.history.push('/phone-number-verification')
     }
 
     setPhoneNumberControl(control)
@@ -113,16 +78,19 @@ const PhoneNumber = (props) => {
       comeBackPage="/"
       submitAction="continue"
       submitHandler={submitHandler}>
-      <Input
-        type="tel"
-        label="What is your phone number?"
-        height="45px"
-        placeholder="+1 569 926 53 35"
-        value={phoneNumberControl.value}
-        isValid={phoneNumberControl.isValid}
-        isTouched={phoneNumberControl.isTouched}
-        errorMessage={phoneNumberControl.errorMessage}
-        onChange={changeHandler}/>
+      <InputWrapper>
+        <PhoneInput
+          country={'us'}
+          value={phoneNumberControl.value}
+          isValid={phoneNumberControl.isValid}
+          isTouched={phoneNumberControl.isTouched}
+          onChange={(value, country, e, formattedValue) => changeHandler(value, country, e, formattedValue)}
+        />
+        <ErrorMessage
+          isValid={phoneNumberControl.isValid}
+          isTouched={phoneNumberControl.isTouched}>
+          {phoneNumberControl.errorMessage}</ErrorMessage>
+      </InputWrapper>
     </AuthLayout>
   )
 }

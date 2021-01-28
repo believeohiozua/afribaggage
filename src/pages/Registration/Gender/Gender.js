@@ -14,7 +14,7 @@ const Gender = (props) => {
     } else if (registrationData.gender) {
       setSelectedItem(registrationData.gender)
     }
-  }, [registrationData.gender])
+  }, [registrationData, props.history])
 
   const changeHandler = () => {
     if (selectedItem === 'male') {

@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Backdrop} from 'components/UI/index'
 import {hideWindowAndBackdrop} from '../../../redux/index'
 
 import {SideDrawerWrapper} from './style'
@@ -8,9 +7,9 @@ import {SideDrawerWrapper} from './style'
 const SideDrawer = (props) => {
   return (
     <>
-      <Backdrop
-        isBackdropVisible={props.isBackdropVisible}
-        onClick={() => props.hideWindowAndBackdropCmp()}/>
+      {/*<Backdrop*/}
+        {/*isBackdropVisible={props.isBackdropVisible}*/}
+        {/*onClick={() => props.hideWindowAndBackdropCmp()}/>*/}
       <SideDrawerWrapper isWindowOpen={props.isWindowOpen}>
         {props.children}
       </SideDrawerWrapper>

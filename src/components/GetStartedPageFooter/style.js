@@ -4,21 +4,28 @@ import {Link} from 'react-router-dom'
 export const FooterWrapper = styled.div`
   padding: 31px 7.5%;
   background: #ffffff;
+  position: relative;
+  margin-bottom: ${p => p.isWindowOpen ? '55px' : 0};
+  
+  @media screen and (max-width: 445px) {
+    padding: 14px 18px;
+  }
+`
+export const FooterRow = styled.div`
   display: flex;
   justify-content: space-between;
-  position: relative;
 `
 
 export const LinksWrapper = styled.div`
   display: flex;
-  
-  @media screen and (max-width: 1040px) {
-    flex-direction: column;
-  }
 `
 
 export const LeftLinksWrapper = styled.div`
   margin-right: 30px;
+  
+  @media screen and (max-width: 550px) {
+    margin-right: 15px;
+  }
 `
 
 export const Nav = styled(Link)`
@@ -37,50 +44,65 @@ export const Nav = styled(Link)`
     font-size: 16px;
   }
   
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 600px) {
     font-size: 14px;
   }
   
-  @media screen and (max-width: 481px) {
-    font-size: 12px;
+  @media screen and (max-width: 550px) {
+    font-size: 13px;
   }
   
   @media screen and (max-width: 445px) {
-    font-size: 10px; 
-  }
-  
-  @media screen and (max-width: 410px) {
-    font-size: 8px; 
-  }
+    margin-bottom: 10px;
+  } 
 `
 
 export const RightLinksWrapper = styled.div``
 
-export const ContactsInfo = styled.div``
+export const ContactsInfo = styled.div`
+  @media screen and (max-width: 424px) {
+    display: none;
+  }
+`
 
 export const Email = styled.p`
   font-size: 18px;
   color: #959595;
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
   
   @media screen and (max-width: 750px) {
     font-size: 16px;
   }
   
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 600px) {
     font-size: 14px;
   }
   
-  @media screen and (max-width: 481px) {
-    font-size: 12px;
+  @media screen and (max-width: 550px) {
+    font-size: 13px;
   }
   
   @media screen and (max-width: 445px) {
-    font-size: 10px; 
+    margin-bottom: 10px;
+  }
+  
+  @media screen and (max-width: 424px) {
+    font-size: 11px;
+    margin-bottom: 0;
   }
   
   @media screen and (max-width: 410px) {
-    font-size: 8px; 
+    font-size: 10px;
+  }
+  
+  @media screen and (max-width: 375px) {
+    font-size: 9px;
+  }
+  
+  @media screen and (max-width: 350px) {
+    font-size: 8px;
   }
 `
 
@@ -88,118 +110,116 @@ export const Address = styled.p`
   font-size: 18px;
   color: #959595;
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
   
   @media screen and (max-width: 750px) {
     font-size: 16px;
   }
   
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 600px) {
     font-size: 14px;
   }
   
-  @media screen and (max-width: 481px) {
-    font-size: 12px;
+  @media screen and (max-width: 550px) {
+    font-size: 13px;
   }
   
   @media screen and (max-width: 445px) {
-    font-size: 10px; 
+    margin-bottom: 10px; 
+  }
+  
+  @media screen and (max-width: 424px) {
+    font-size: 11px;
+    margin-bottom: 0;
   }
   
   @media screen and (max-width: 410px) {
-    font-size: 8px; 
+    font-size: 10px;
+  }
+  
+  @media screen and (max-width: 375px) {
+    font-size: 9px;
+  }
+  
+  @media screen and (max-width: 350px) {
+    font-size: 8px;
   }
 `
 
 export const PhoneNumber = styled.p`
   font-size: 18px;
   color: #CACACA;
+  display: flex;
+  align-items: center;
   
   @media screen and (max-width: 750px) {
     font-size: 16px;
   }
   
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 600px) {
     font-size: 14px;
   }
   
-  @media screen and (max-width: 481px) {
-    font-size: 12px;
+  @media screen and (max-width: 550px) {
+    font-size: 13px;
   }
   
-  @media screen and (max-width: 445px) {
-    font-size: 10px; 
-  }
-  
-  @media screen and (max-width: 410px) {
-    font-size: 8px; 
-  }
-`
-
-export const ExtraInfoWrapper = styled.div`
-  width: 28.4%;
-  
-  @media screen and (max-width: 810px) {
-    position: absolute;
-    bottom: 43px;
-    left: 35%;
-    width: 60%;
-  }
-  
-  @media screen and (max-width: 520px) {
-    left: 30%;
-  }
-  
-  @media screen and (max-width: 481px) {
-    font-size: 12px;
-  }
-  
-  @media screen and (max-width: 445px) {
-    font-size: 10px; 
+  @media screen and (max-width: 424px) {
+    font-size: 11px;
   }
   
   @media screen and (max-width: 410px) {
-    font-size: 8px; 
+    font-size: 10px;
+  }
+  
+  @media screen and (max-width: 375px) {
+    font-size: 9px;
+  }
+  
+  @media screen and (max-width: 350px) {
+    font-size: 8px;
   }
 `
 
-export const ExtraInfo = styled.p`
-  font-size: 18px;
-  line-height: 175%;
-  color: #CACACA;
-  
-  @media screen and (max-width: 750px) {
-    font-size: 16px;
-  }
-  
-  @media screen and (max-width: 520px) {
-    font-size: 14px;
-  }
-  
-  @media screen and (max-width: 481px) {
-    font-size: 12px;
-  }
-  
-  @media screen and (max-width: 445px) {
-    font-size: 10px; 
-  }
-  
-  @media screen and (max-width: 410px) {
-    font-size: 8px; 
-  }
-`
-
-export const LogoWrapper = styled.div`
+export const LogoSocietiesWrapper = styled.div`
   width: 125px;
   
-  @media screen and (max-width: 481px) {
-    width: 110px;
-  } 
-  
-  @media screen and (max-width: 445px) {
-    width: 90px;
-  }
+  @media screen and (max-width: 550px) {
+    width: 83px;
+  }  
 `
 
 export const Logo = styled.img`
   width: 100%;
+`
+
+export const Societies = styled.div`
+  width: 66px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  
+  @media screen and (min-width: 382px) {
+    display: none;
+  }
+`
+
+export const SocietyLink = styled.a``
+
+export const SocietyImage = styled.img``
+
+export const ContactsInfoMini = styled.div`
+  display: flex;  
+  justify-content: space-between;
+  margin-top: 7px;  
+
+  @media screen and (min-width: 425px) {
+    display: none;
+  } 
+`
+
+export const Icon = styled.img`
+  display: inline-block;
+  margin-right: 2.84px;
 `

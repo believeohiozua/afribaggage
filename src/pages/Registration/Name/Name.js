@@ -26,7 +26,7 @@ const Name = (props) => {
       field.value = registrationData.name
       setNameControl(field)
     }
-  }, [])
+  }, [nameControl, props.history])
 
   const changeHandler = (event) => {
     const control = {...nameControl}

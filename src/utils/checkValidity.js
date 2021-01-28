@@ -23,5 +23,9 @@ export const checkValidity = (value, rules) => {
     isValid = pattern.test(value) && isValid
   }
 
+  if (rules.isPhoneNumberVerification) {
+    isValid = value.trim().length === 4 && isValid
+  }
+
   return isValid
 }

@@ -19,7 +19,6 @@ const PhoneNumber = (props) => {
   useEffect(() => {
     if (loginData) {
       if (loginData.phoneNumber) {
-        console.log(loginData.phoneNumber)
         const field = {...phoneNumberControl}
         field.value = loginData.phoneNumber
         setPhoneNumberControl(field)

@@ -23,19 +23,25 @@ export const CompanyInfoWrapper = styled.div`
 
 export const VideoWrapper = styled.div`
   width: 48%;
+  height: 0;
+  padding-bottom: 27%;
+  position: relative;
   
   @media screen and (max-width: 1040px) {
-    width: 70%;
+    width: 50%;
     margin: 0 auto;
+    padding-bottom: 28.3%;
   }
   
   @media screen and (max-width: 750px) {
-    width: 100%;
+    width: 70%;
+    padding-bottom: 39.4%;
   }
-`
-
-export const Video = styled.img`
-  width: 100%;
+  
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    padding-bottom: 56.4%;
+  }
 `
 
 export const ContentWrapper = styled.div`
@@ -58,13 +64,15 @@ export const Title = styled.h2`
   line-height: 150%;
   margin-bottom: 16px;
   
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 1040px) {
     text-align: center;
+  }
+  
+  @media screen and (max-width: 750px) {
     font-size: 40px;
   }
   
   @media screen and (max-width: 520px) {
-    text-align: center;
     font-size: 34px;
   }
   
@@ -73,7 +81,7 @@ export const Title = styled.h2`
   }
   
   @media screen and (max-width: 410px) {
-    font-size: 27px;
+    font-size: 26px;
   }
 `
 
@@ -82,6 +90,10 @@ export const Description = styled.p`
   font-weight: 500;
   line-height: 150%;
   margin-bottom: 28px;
+  
+  @media screen and (max-width: 1040px) {
+    text-align: center;
+  }
   
   @media screen and (max-width: 750px) {
     font-size: 20px;
@@ -113,15 +125,6 @@ export const CompanyHelpsWith = styled.p`
   @media screen and (max-width: 750px) {
     font-size: 20px;
   }
-  
-  @media screen and (max-width: 520px) {
-    font-size: 16px;
-  }
-  
-  @media screen and (max-width: 410px) {
-    font-size: 14px;
-    font-weight: 500;
-  }
 `
 
 export const CompanyHelpsWithItem = styled.div`
@@ -132,17 +135,82 @@ export const CompanyHelpsWithItem = styled.div`
   
   @media screen and (max-width: 750px) {
     font-size: 14px;
-  }
-  
-  @media screen and (max-width: 410px) {
-    font-size: 12px;
+    font-weight: 500;
   }
 `
 
 export const CompanyHelpsWithIcon = styled.img`
-  margin-right: 10px;
+  margin-right: 8px;
+  width: 28px;
+  height: 28px; 
+`
+
+export const WhoUseAfribaggageWrapper = styled.div`
+  background: #FFFFFF;
+  box-shadow: 1.59211px 3.18421px 4.77632px rgba(0, 0, 0, .03);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 0 auto 138px;
+  width: 264px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
   
-  @media screen and (max-width: 410px) {
-    width: 26px;
+  @media screen and (max-width: 855px) {
+    margin-bottom: 36px;
   }
+`
+
+export const WhoUseAfribaggagePhotos = styled.div`
+  display: flex; 
+`
+
+export const UserAvatarWrapper = styled.div`
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  position: relative;
+  right: 13px;
+  
+  :first-of-type {
+    right: 0;
+  }
+  
+  :last-of-type {
+    right: 26px;
+  }
+`
+
+export const Avatar = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+`
+
+export const StatisticWrapper = styled.div`
+  position: relative;
+  right: 10px;
+`
+
+export const RatingStarsWrapper = styled.div`
+  display: flex;
+  margin-bottom: 5px;
+`
+
+export const RatingStar = styled.img`
+  margin-right: 3px;
+  
+  :last-of-type {
+    margin-right: 0;
+  }
+`
+
+export const UsersAmount = styled.p`
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 150%;
+`
+
+export const CompanyName = styled.span`
+  color: #f05050;
 `
