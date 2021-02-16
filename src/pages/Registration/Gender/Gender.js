@@ -1,18 +1,24 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import {AuthLayout} from 'layouts'
 import {thirdLevelOfRegistration} from 'assets'
 
 import {GenderSelect, Option} from './style'
 
 const Gender = (props) => {
-  const [selectedItem, setSelectedItem] = useState('male')
   const registrationData = JSON.parse(localStorage.getItem('registrationData'))
+  const getDefaultGender = useMemo(() => {
+    if (registrationData.gender) {
+      return registrationData.gender
+    } else {
+      return 'male'
+    }
+  }, [registrationData.gender])
+
+  const [selectedItem, setSelectedItem] = useState(getDefaultGender)
 
   useEffect(() => {
     if (!registrationData) {
       props.history.push('/phone-number')
-    } else if (registrationData.gender) {
-      setSelectedItem(registrationData.gender)
     }
   }, [registrationData, props.history])
 

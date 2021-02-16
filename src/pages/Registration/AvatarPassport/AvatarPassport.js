@@ -64,7 +64,7 @@ const AvatarPassport = (props) => {
       console.log('Registration data', registrationData)
       localStorage.setItem('registrationData', JSON.stringify(registrationData))
       localStorage.removeItem('registrationData')
-      props.history.push('/login-phone-number')
+      props.history.push('/item-travellers-list')
     } else {
       setIisSubmitted(true)
     }

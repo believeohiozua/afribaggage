@@ -1,20 +1,17 @@
 import {
   SELECT_LOADS,
   SELECT_TRIPS,
-  // GET_FOUND_OFFERS,
-  // FILTER,
-  // SORT,
   SHOW_USER_INFO,
-  HIDE_USER_INFO
+  HIDE_USER_INFO,
+  SHOW_FILTERS_BLOCK,
+  HIDE_FILTERS_BLOCK
 } from '../actionTypes'
 
 const initialState = {
+  isFiltersBlockVisible: false,
   areLoadsSelected: true,
   areTripsSelected: false,
-  isUserInfoVisible: false,
-  // foundedOffers: 40,
-  // filteredArr: [],
-  // sortedArr: []
+  isUserInfoVisible: false
 }
 
 export const filtersReducer = (state = initialState, action) => {
@@ -33,16 +30,14 @@ export const filtersReducer = (state = initialState, action) => {
         areTripsSelected: true,
         isUserInfoVisible: false
       }
-    // case GET_FOUND_OFFERS:
-    //   return {...state, foundedOffers: action.payload}
-    // case FILTER:
-    //   return {...state, filteredArr: action.payload}
-    // case SORT:
-    //   return {...state, sortedArr: action.payload}
     case SHOW_USER_INFO:
       return {...state, isUserInfoVisible: true}
     case HIDE_USER_INFO:
       return {...state, isUserInfoVisible: false}
+    case SHOW_FILTERS_BLOCK:
+      return {...state, isFiltersBlockVisible: true}
+    case HIDE_FILTERS_BLOCK:
+      return {...state, isFiltersBlockVisible: false}
     default:
       return state
   }

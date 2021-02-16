@@ -1,38 +1,38 @@
-import React, {useState, useEffect} from 'react'
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import React, {useState, useMemo} from 'react'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 import {AuthLayout} from 'layouts'
 import {firstLevelOfRegistration} from 'assets'
-import './phoneNumberCustomise.css'
 
-import {InputWrapper, ErrorMessage} from './style'
+import {FieldWrapper, Label, InputWrapper, ErrorMessage} from './style'
 
 const PhoneNumber = (props) => {
   const registrationData = JSON.parse(localStorage.getItem('registrationData'))
+
+  const getDefaultPhoneNumberValue = useMemo(() => {
+    if (registrationData) {
+      if (registrationData.phoneNumber) {
+        return registrationData.phoneNumber
+      }
+    }
+  }, [registrationData])
+
+  const getReturnRoute = useMemo(() => {
+    return localStorage.getItem('return-route')
+  }, [])
+
   const [phoneNumberControl, setPhoneNumberControl] = useState({
-    value: '',
+    value: getDefaultPhoneNumberValue,
     isValid: false,
     isTouched: false,
     errorMessage: 'Fill in the field'
   })
 
-  useEffect(() => {
-    if (registrationData) {
-      if (registrationData.phoneNumber) {
-        const field = {...phoneNumberControl}
-        field.value = registrationData.phoneNumber
-        setPhoneNumberControl(field)
-      }
-    }
-  }, [])
-
-  const changeHandler = (value, country, e, formattedValue) => {
+  const changeHandler = (event) => {
     const control = {...phoneNumberControl}
 
-    control.value = formattedValue
-    control.isValid = control.value.length === country.format.length
-
-    console.log(control.isValid)
+    control.value = event
+    control.isValid = control.value ? control.value.length !== 0 : false
 
     setPhoneNumberControl(control)
   }
@@ -40,8 +40,13 @@ const PhoneNumber = (props) => {
   const submitHandler = () => {
     const control = {...phoneNumberControl}
 
+    control.isValid = control.value ? control.value.length !== 0 : false
+    control.isTouched = true
+
     if (control.isValid) {
       const formData = {}
+      formData.phoneNumber = phoneNumberControl.value
+
       if (registrationData) {
         if (registrationData.name) {
           formData.name = registrationData.name
@@ -63,7 +68,7 @@ const PhoneNumber = (props) => {
       control.isValid = false
       control.isTouched = false
       control.errorMessage = 'Fill in the field'
-      // props.history.push('/phone-number-verification')
+      props.history.push('/phone-number-verification')
     }
 
     setPhoneNumberControl(control)
@@ -75,22 +80,25 @@ const PhoneNumber = (props) => {
       register
       pageAction="Registration"
       registerLevel={firstLevelOfRegistration}
-      comeBackPage="/"
+      comeBackPage={getReturnRoute || '/'}
       submitAction="continue"
       submitHandler={submitHandler}>
-      <InputWrapper>
-        <PhoneInput
-          country={'us'}
-          value={phoneNumberControl.value}
-          isValid={phoneNumberControl.isValid}
-          isTouched={phoneNumberControl.isTouched}
-          onChange={(value, country, e, formattedValue) => changeHandler(value, country, e, formattedValue)}
-        />
+      <FieldWrapper>
+        <Label>What is your phone number? </Label>
+        <InputWrapper>
+          <PhoneInput
+            international
+            readOnly={!phoneNumberControl.value}
+            value={phoneNumberControl.value}
+            placeholder="Choose your country"
+            onChange={changeHandler}
+          />
+        </InputWrapper>
         <ErrorMessage
           isValid={phoneNumberControl.isValid}
           isTouched={phoneNumberControl.isTouched}>
           {phoneNumberControl.errorMessage}</ErrorMessage>
-      </InputWrapper>
+      </FieldWrapper>
     </AuthLayout>
   )
 }

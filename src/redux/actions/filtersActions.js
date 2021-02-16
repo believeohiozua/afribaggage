@@ -1,12 +1,23 @@
 import {
   SELECT_LOADS,
   SELECT_TRIPS,
-  // GET_FOUND_OFFERS,
-  // FILTER,
-  // SORT,
   HIDE_USER_INFO,
-  SHOW_USER_INFO
+  SHOW_USER_INFO,
+  SHOW_FILTERS_BLOCK,
+  HIDE_FILTERS_BLOCK
 } from '../actionTypes'
+
+export const showFiltersBlock = () => {
+  return {
+    type: SHOW_FILTERS_BLOCK
+  }
+}
+
+export const hideFiltersBlock = () => {
+  return {
+    type: HIDE_FILTERS_BLOCK
+  }
+}
 
 export const selectLoads = () => {
   return {
@@ -19,27 +30,6 @@ export const selectTrips = () => {
     type: SELECT_TRIPS
   }
 }
-
-// export const getFoundOffers = (count) => {
-//   return {
-//     type: GET_FOUND_OFFERS,
-//     payload: count
-//   }
-// }
-
-// export const filter = (arr) => {
-//   return {
-//     type: FILTER,
-//     payload: arr
-//   }
-// }
-//
-// export const sort = (arr) => {
-//   return {
-//     type: SORT,
-//     payload: arr
-//   }
-// }
 
 export const showUserInfo = () => {
   return {

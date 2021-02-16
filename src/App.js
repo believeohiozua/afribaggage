@@ -1,18 +1,19 @@
 import React from 'react'
-import {Switch, Route} from 'react-router-dom'
-import {GetStartedPage} from 'pages'
+import {Route, Switch} from 'react-router-dom'
+import {GetStartedPage, ItemsTravellersList, CardInfoPage} from 'pages'
+
 import {
   PhoneNumber as LoginPhoneNumber,
   PhoneNumberVerification as LoginPhoneNumberVerification
 } from 'pages/Login'
 
 import {
-  PhoneNumber,
-  PhoneNumberVerification,
-  Name,
-  Gender,
   AvatarPassport,
-  CropPhoto
+  CropPhoto,
+  Gender,
+  Name,
+  PhoneNumber,
+  PhoneNumberVerification
 } from 'pages/Registration'
 
 import 'fonts.css'
@@ -20,6 +21,8 @@ import 'fonts.css'
 const App = () => {
   return (
     <Switch>
+      <Route path="/card-info" component={CardInfoPage}/>
+      <Route path="/item-travellers-list" component={ItemsTravellersList}/>
       <Route path="/login-phone-number-verification" component={LoginPhoneNumberVerification}/>
       <Route path="/login-phone-number" component={LoginPhoneNumber}/>
       <Route path="/crop-photo" component={CropPhoto}/>

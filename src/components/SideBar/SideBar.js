@@ -1,4 +1,5 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import {
@@ -34,8 +35,11 @@ import {
 } from './style'
 
 const SideBar = (props) => {
+  const history = useHistory()
+
   const travellersDeliveryHandler = () => {
     props.showTravellersPageCmp()
+    history.push('/item-travellers-list')
   }
 
   const airSharingHandler = () => {

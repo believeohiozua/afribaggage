@@ -104,7 +104,7 @@ const PhoneNumberVerification = (props) => {
 
       localStorage.removeItem('loginData')
 
-      // props.history.push('/name')
+      props.history.push('/item-travellers-list')
     } else {
       setIsFormSubmitted(true)
     }
@@ -115,7 +115,7 @@ const PhoneNumberVerification = (props) => {
       history={props.history}
       pageAction="Code Verification"
       comeBackPage="/login-phone-number"
-      submitAction="continue"
+      submitAction="log in"
       submitHandler={submitHandler}>
       <CodeFieldsWrapper style={{marginTop: '65px'}}>
         <CodeField

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const AuthLayoutWrapper = styled.div`
-  padding: 35px 31px 116px;
+  padding: 35px 31px 70px;
   overflow: auto;
 `
 
@@ -43,7 +43,7 @@ export const PageAction = styled.h2`
 
 export const RegisterLevelWrapper = styled.div`
   width: 210px;
-  margin: 0 auto 60px;
+  margin: 0 auto 30px;
 `
 
 export const RegisterLevel = styled.img`

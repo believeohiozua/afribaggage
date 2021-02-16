@@ -9,73 +9,107 @@ import {
   twitterIcon,
   footerEmailIcon,
   footerLocationIcon,
-  footerPhoneIcon
+  footerPhoneIcon,
+  telegramIconOrange,
+  facebookIconOrange,
+  twitterIconOrange,
+  instagramIconOrange,
+  linkedInIconOrange
 } from 'assets'
 
 import {
-  Address,
-  ContactsInfo,
-  ContactsInfoMini,
-  Email,
   FooterWrapper,
-  LeftLinksWrapper,
+  LinksContactsWrapper,
   LinksWrapper,
+  FirstLinksPart,
+  CompanyInfoLink as Link,
+  SecondLinksPart,
+  ContactsWrapper,
+  ContactWrapper,
+  ContactIcon,
+  ContactValue,
+  CompanyInfoMessage,
+  LogoSocialLinksWrapper,
+  LogoWrapper,
   Logo,
-  LogoSocietiesWrapper,
-  Nav,
-  PhoneNumber,
-  RightLinksWrapper,
-  Societies,
-  SocietyImage,
-  SocietyLink,
-  FooterRow,
-  Icon
+  SocialLinksWrapper,
+  SocialLink,
+  SocialLinkIcon,
+  SocialLinksWrapperMini,
+  SocialLinkMini,
+  SocialLinkIconMini
 } from './style'
 
 const GetStartedPageFooter = (props) => {
   return (
     <FooterWrapper isWindowOpen={props.isWindowOpen}>
-      <FooterRow>
+      <LinksContactsWrapper>
         <LinksWrapper>
-          <LeftLinksWrapper>
-            <Nav to="#!">About</Nav>
-            <Nav to="#!">Contact us</Nav>
-            <Nav to="#!">Resources</Nav>
-          </LeftLinksWrapper>
-          <RightLinksWrapper>
-            <Nav to="#!">Transport</Nav>
-            <Nav to="#!">Advertise</Nav>
-            <Nav to="#!">Terms of Use</Nav>
-          </RightLinksWrapper>
+          <FirstLinksPart>
+            <Link to="#!">About</Link>
+            <Link to="#!">Contact us</Link>
+            <Link to="#!">Resources</Link>
+          </FirstLinksPart>
+          <SecondLinksPart>
+            <Link to="#!">Transport</Link>
+            <Link to="#!">Advertises</Link>
+            <Link to="#!">Terms of Use</Link>
+          </SecondLinksPart>
         </LinksWrapper>
-        <ContactsInfo>
-          <Email>help@afribaggage.com</Email>
-          <Address>Lagos, High street 68</Address>
-          <PhoneNumber>+234 626 623 73 26</PhoneNumber>
-        </ContactsInfo>
-        <LogoSocietiesWrapper>
-          <Logo src={namedLogo}/>
-          <Societies>
-            <SocietyLink href="#!">
-              <SocietyImage src={facebookIcon}/>
-            </SocietyLink>
-            <SocietyLink href="#!">
-              <SocietyImage src={telegramIcon}/>
-            </SocietyLink>
-            <SocietyLink href="#!">
-              <SocietyImage src={twitterIcon}/>
-            </SocietyLink>
-            <SocietyLink href="#!">
-              <SocietyImage src={instagramIcon}/>
-            </SocietyLink>
-          </Societies>
-        </LogoSocietiesWrapper>
-      </FooterRow>
-      <ContactsInfoMini>
-        <Email><Icon src={footerEmailIcon}/> help@afribaggage.com</Email>
-        <Address><Icon src={footerLocationIcon}/> Lagos, High street 68</Address>
-        <PhoneNumber><Icon src={footerPhoneIcon}/> +234 626 623 73 26</PhoneNumber>
-      </ContactsInfoMini>
+        <ContactsWrapper>
+          <ContactWrapper>
+            <ContactIcon src={footerPhoneIcon} alt=""/>
+            <ContactValue>+234 626 623 73 26</ContactValue>
+          </ContactWrapper>
+          <ContactWrapper>
+            <ContactIcon src={footerEmailIcon} alt=""/>
+            <ContactValue>help@afribaggage.com</ContactValue>
+          </ContactWrapper>
+          <ContactWrapper>
+            <ContactIcon src={footerLocationIcon} alt=""/>
+            <ContactValue>MaryLand 100211</ContactValue>
+          </ContactWrapper>
+        </ContactsWrapper>
+      </LinksContactsWrapper>
+      <CompanyInfoMessage>
+        Afribaggage is a solution provider helping improve international shipping through technological innovations and providing earning opportunities for travelers / carriers .
+      </CompanyInfoMessage>
+      <LogoSocialLinksWrapper>
+        <LogoWrapper>
+          <Logo src={namedLogo} alt=""/>
+        </LogoWrapper>
+        <SocialLinksWrapper>
+          <SocialLink to="#!">
+            <SocialLinkIcon src={telegramIconOrange} alt=""/>
+          </SocialLink>
+          <SocialLink to="#!">
+            <SocialLinkIcon src={facebookIconOrange} alt=""/>
+          </SocialLink>
+          <SocialLink to="#!">
+            <SocialLinkIcon src={twitterIconOrange} alt=""/>
+          </SocialLink>
+          <SocialLink to="#!">
+            <SocialLinkIcon src={instagramIconOrange} alt=""/>
+          </SocialLink>
+          <SocialLink to="#!">
+            <SocialLinkIcon src={linkedInIconOrange} alt=""/>
+          </SocialLink>
+        </SocialLinksWrapper>
+        <SocialLinksWrapperMini>
+          <SocialLinkMini to="#!">
+            <SocialLinkIconMini src={facebookIcon} alt=""/>
+          </SocialLinkMini>
+          <SocialLinkMini to="#!">
+            <SocialLinkIconMini src={telegramIcon} alt=""/>
+          </SocialLinkMini>
+          <SocialLinkMini to="#!">
+            <SocialLinkIconMini src={twitterIcon} alt=""/>
+          </SocialLinkMini>
+          <SocialLinkMini to="#!">
+            <SocialLinkIconMini src={instagramIcon} alt=""/>
+          </SocialLinkMini>
+        </SocialLinksWrapperMini>
+      </LogoSocialLinksWrapper>
     </FooterWrapper>
   )
 }

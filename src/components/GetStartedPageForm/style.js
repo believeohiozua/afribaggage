@@ -77,8 +77,7 @@ export const Form = styled.form`
 `
 
 export const InputWrapper = styled.div`
-  margin-right: 20px;
-  box-sizing: border-box;
+  width: 42%; 
   
   @media screen and (max-width: 855px) {
     width: 100%;
@@ -100,7 +99,48 @@ export const ButtonWrapper = styled.div`
   @media screen and (max-width: 855px) {
     width: 100%;
     top: 0;
-    margin-top: 20px;
+    margin-top: 30px;
     height: 35px;
   }
+`
+
+export const FieldWrapper = styled.div`
+  margin-top: 10px;
+`
+
+export const Label = styled.label`
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #909395;
+  margin-bottom: 6px;
+  margin-left: 10px;
+`
+
+export const PhoneNumberInputWrapper = styled.div`
+  padding-left: 10px;
+  border: 1px solid #C6D2DE;
+  box-sizing: border-box;
+  border-radius: 8px;
+  
+  :nth-child(2) {
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-left: 1px solid #C6D2DE;
+      
+      &::placeholder {
+        color: #C7CFD3;
+      }
+    }
+  }
+`
+
+export const ErrorMessage = styled.p`
+  font-size: 12px;
+  color: #ff0000;
+  margin-top: 5px;
+  text-align: right;
+  opacity: ${p => !p.isValid && p.isTouched ? 1 : 0};
 `

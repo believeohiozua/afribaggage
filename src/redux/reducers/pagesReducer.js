@@ -1,21 +1,18 @@
 import {
-  // SHOW_HOME_PART,
-  // SHOW_HOW_IT_WORKS_PART,
   SHOW_TRAVELLERS_PAGE,
   SHOW_AIR_SHARING_PAGE,
   SHOW_CONTAINER_SHARING_PAGE,
   SHOW_NEWS_EVENTS_PAGE,
   SHOW_REGION_PAGE,
-  SHOW_RESOURCES_PAGE
+  SHOW_RESOURCES_PAGE,
+  LEAVE_ALL_PAGES
 } from '../actionTypes'
 
 const initialState = {
-  isTravellersPageActive: false,
+  isTravellersPageActive: window.location.pathname === '/item-travellers-list',
   isAirSharingPageActive: false,
   isContainerSharingPageActive: false,
   isNewsEventsPageActive: false,
-  // isHomeLinkActive: true,
-  // isHowIsWorksLinkActive: false,
   isRegionPageActive: false,
   isResourcesPageActive: false,
   isSenderDescriptionActive: true,
@@ -84,10 +81,16 @@ export const pagesReducer = (state = initialState, action) => {
         isRegionPageActive: false,
         isResourcesPageActive: true
       }
-    // case SHOW_HOME_PART:
-    //   return {...state, isHomeLinkActive: true, isHowIsWorksLinkActive: false}
-    // case SHOW_HOW_IT_WORKS_PART:
-    //   return {...state, isHomeLinkActive: false, isHowIsWorksLinkActive: true}
+    case LEAVE_ALL_PAGES:
+      return {
+        ...state,
+        isTravellersPageActive: false,
+        isAirSharingPageActive: false,
+        isContainerSharingPageActive: false,
+        isNewsEventsPageActive: false,
+        isRegionPageActive: false,
+        isResourcesPageActive: false
+      }
     default:
       return state
   }

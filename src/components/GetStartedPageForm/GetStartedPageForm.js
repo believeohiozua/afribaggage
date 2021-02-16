@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 import {Input, Button} from 'components/UI'
-import {checkValidity, validForm} from 'utils'
+import {checkValidity} from 'utils'
 
 import {
   GetStartedPageFormWrapper,
@@ -10,10 +13,15 @@ import {
   Nav,
   Form,
   InputWrapper,
-  ButtonWrapper
+  ButtonWrapper,
+  FieldWrapper,
+  Label,
+  PhoneNumberInputWrapper,
+  ErrorMessage
 } from './style'
 
 const GetStartedPageForm = () => {
+  const history = useHistory()
   const [isCodeVerificationActive, setIsCodeVerificationActive] = useState(false)
   const [controls, setControls] = useState({
     email: {
@@ -50,39 +58,28 @@ const GetStartedPageForm = () => {
 
   const changeHandler = (event) => {
     const fields = {...controls}
-    const {name} = event.target
-
-    fields[name].value = event.target.value
+    const name = event && event.target ? event.target.name : 'phoneNumber'
 
     if (name !== 'phoneNumber') {
+      fields[name].value = event.target.value
       fields[name].isValid = checkValidity(event.target.value.trim(), fields[name].rules)
-    } else {
-      if (event.target.value[0] === '+') {
-        fields.phoneNumber.isValid = checkValidity('+' + event.target.value.trim().replace(/[^\d]/g, ''), fields.phoneNumber.rules)
-      } else {
-        fields.phoneNumber.isValid = checkValidity(event.target.value.trim().replace(/[^\d]/g, ''), fields.phoneNumber.rules)
+      if (fields[name].value.trim() === '') {
+        fields.email.errorMessage = 'Fill in the field'
       }
-    }
+      if (!fields.email.isValid) {
+        fields.email.errorMessage = 'Wrong email address'
+      }
+      if (fields.phoneNumberVerification.value.trim().length !== 4 &&
+        fields.phoneNumberVerification.value.trim().length) {
+        fields.phoneNumberVerification.errorMessage = 'Write 4 numbers'
+      }
 
-    if (fields[name].value.trim() === '') {
-      fields.email.errorMessage = 'Fill in the field'
-    }
-
-    if (!fields.email.isValid) {
-      fields.email.errorMessage = 'Wrong email address'
-    }
-
-    if (!fields.phoneNumber.isValid) {
-      fields.phoneNumber.errorMessage = 'Write number in +1 345 567 format'
-    }
-
-    if (fields.phoneNumberVerification.value.trim().length !== 4 &&
-      fields.phoneNumberVerification.value.trim().length) {
-      fields.phoneNumberVerification.errorMessage = 'Write 4 numbers'
-    }
-
-    if (!fields.phoneNumberVerification.value.trim().length) {
-      fields.phoneNumberVerification.errorMessage = 'Fill in the field'
+      if (!fields.phoneNumberVerification.value.trim().length) {
+        fields.phoneNumberVerification.errorMessage = 'Fill in the field'
+      }
+    } else {
+      fields.phoneNumber.value = event
+      fields.phoneNumber.isValid = fields.phoneNumber.value ? fields.phoneNumber.value.length !== 0 : false
     }
 
     setControls(fields)
@@ -94,35 +91,29 @@ const GetStartedPageForm = () => {
 
     if (name !== 'phoneNumber') {
       fields[name].isValid = checkValidity(event.target.value.trim(), fields[name].rules)
-    } else {
-      if (event.target.value[0] === '+') {
-        fields.phoneNumber.isValid = checkValidity('+' + event.target.value.trim().replace(/[^\d]/g, ''), fields.phoneNumber.rules)
-      } else {
-        fields.phoneNumber.isValid = checkValidity(event.target.value.trim().replace(/[^\d]/g, ''), fields.phoneNumber.rules)
+      fields[name].isTouched = true
+
+      if (fields[name].value.trim() === '') {
+        fields[name].errorMessage = 'Fill in the field'
       }
-    }
+      if (fields.email.value.trim().length) {
+        fields.email.errorMessage = 'Wrong email address'
+      }
 
-    fields[name].isTouched = true
+      if (fields.phoneNumberVerification.value.trim().length !== 4 &&
+        fields.phoneNumberVerification.value.trim().length) {
+        fields.phoneNumberVerification.errorMessage = 'Write 4 numbers'
+      }
 
-    if (fields[name].value.trim() === '') {
-      fields[name].errorMessage = 'Fill in the field'
-    }
+      if (!fields.phoneNumberVerification.value.trim().length) {
+        fields.phoneNumberVerification.errorMessage = 'Fill in the field'
+      }
+    } else {
+      fields.phoneNumber.isValid = fields.phoneNumber.value ? fields.phoneNumber.value.length !== 0 : false
+      fields.phoneNumber.isTouched = true
 
-    if (fields.email.value.trim().length) {
-      fields.email.errorMessage = 'Wrong email address'
-    }
-    
-    if (fields.phoneNumber.value.trim().length) {
-      fields.phoneNumber.errorMessage = 'Write number in +1 345 567 format'
-    }
-
-    if (fields.phoneNumberVerification.value.trim().length !== 4 &&
-      fields.phoneNumberVerification.value.trim().length) {
-      fields.phoneNumberVerification.errorMessage = 'Write 4 numbers'
-    }
-
-    if (!fields.phoneNumberVerification.value.trim().length) {
-      fields.phoneNumberVerification.errorMessage = 'Fill in the field'
+      console.log('fields.phoneNumber.isValid', fields.phoneNumber.isValid)
+      console.log('fields.phoneNumber.isTouched', fields.phoneNumber.isTouched)
     }
 
     setControls(fields)
@@ -142,6 +133,7 @@ const GetStartedPageForm = () => {
         item[1].isValid = false
         item[1].isTouched = false
         item[1].errorMessage = 'Fill in the field'
+        history.push('/item-travellers-list')
       })
 
       console.log(formData)
@@ -179,18 +171,24 @@ const GetStartedPageForm = () => {
                 onBlur={blurHandler}/>
             </InputWrapper>
             <InputWrapper>
-              <Input
-                name="phoneNumber"
-                type="text"
-                label="Phone number"
-                height="45px"
-                value={controls.phoneNumber.value}
-                isValid={controls.phoneNumber.isValid}
-                isTouched={controls.phoneNumber.isTouched}
-                errorMessage={controls.phoneNumber.errorMessage}
-                placeholder="+1 434 543"
-                onChange={changeHandler}
-                onBlur={blurHandler}/>
+              <FieldWrapper>
+                <Label>What is your phone number? </Label>
+                <PhoneNumberInputWrapper>
+                  <PhoneInput
+                    international
+                    readOnly={!controls.phoneNumber.value}
+                    name="phoneNumber"
+                    value={controls.phoneNumber.value}
+                    placeholder="Choose your country"
+                    onChange={changeHandler}
+                    onBlur={blurHandler}
+                  />
+                </PhoneNumberInputWrapper>
+                <ErrorMessage
+                  isValid={controls.phoneNumber.isValid}
+                  isTouched={controls.phoneNumber.isTouched}>
+                  {controls.phoneNumber.errorMessage}</ErrorMessage>
+              </FieldWrapper>
             </InputWrapper>
           </>
         ) : (

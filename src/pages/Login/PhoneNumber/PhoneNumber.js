@@ -1,12 +1,26 @@
-import React, {useState, useEffect} from 'react'
-import {Input} from 'components/UI'
+import React, {useState, useCallback, useMemo} from 'react'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 import {AuthLayout} from 'layouts'
-import {checkValidity} from 'utils'
+
+import {FieldWrapper, Label, InputWrapper, ErrorMessage} from './style'
 
 const PhoneNumber = (props) => {
-  const loginData = JSON.parse(localStorage.getItem('loginData'))
+  const getDefaultPhoneNumberValue = useCallback(() => {
+    const loginData = JSON.parse(localStorage.getItem('loginData'))
+    if (loginData) {
+      if (loginData.phoneNumber) {
+        return loginData.phoneNumber
+      }
+    }
+  }, [])
+
+  const getReturnRoute = useMemo(() => {
+    return localStorage.getItem('return-route')
+  }, [])
+
   const [phoneNumberControl, setPhoneNumberControl] = useState({
-    value: '',
+    value: getDefaultPhoneNumberValue(),
     isValid: false,
     isTouched: false,
     errorMessage: 'Fill in the field',
@@ -16,38 +30,11 @@ const PhoneNumber = (props) => {
     }
   })
 
-  useEffect(() => {
-    if (loginData) {
-      if (loginData.phoneNumber) {
-        const field = {...phoneNumberControl}
-        field.value = loginData.phoneNumber
-        setPhoneNumberControl(field)
-      }
-    }
-  }, [])
-
   const changeHandler = (event) => {
     const control = {...phoneNumberControl}
 
-    control.value = event.target.value
-
-    let number
-
-    if (control.value[0] === '+') {
-      number = '+' + control.value.replace(/[^\d]/g, '')
-    } else {
-      number = control.value.replace(/[^\d]/g, '')
-    }
-
-    control.isValid = checkValidity(number.trim(), control.rules)
-
-    if (!control.isValid) {
-      if (control.value.length > 0) {
-        control.errorMessage = 'Write number in +1 345 567 format'
-      } else {
-        control.errorMessage = 'Fill in the field'
-      }
-    }
+    control.value = event
+    control.isValid = control.value ? control.value.length !== 0 : false
 
     setPhoneNumberControl(control)
   }
@@ -55,26 +42,12 @@ const PhoneNumber = (props) => {
   const submitHandler = () => {
     const control = {...phoneNumberControl}
 
-    let number
-
-    if (control.value[0] === '+') {
-      number = '+' + control.value.replace(/[^\d]/g, '')
-    } else {
-      number = control.value.replace(/[^\d]/g, '')
-    }
-
-    control.isValid = checkValidity(number.trim(), control.rules)
+    control.isValid = control.value ? control.value.length !== 0 : false
     control.isTouched = true
-
-    if (control.value.length > 0) {
-      control.errorMessage = 'Write number in +1 345 567 format'
-    } else {
-      control.errorMessage = 'Fill in the field'
-    }
 
     if (control.isValid) {
       const formData = {}
-      formData.phoneNumber = '+' + control.value.replace(/[^\d]/g, '')
+      formData.phoneNumber = phoneNumberControl.value
 
       localStorage.setItem('loginData', JSON.stringify(formData))
 
@@ -92,20 +65,25 @@ const PhoneNumber = (props) => {
     <AuthLayout
       history={props.history}
       pageAction="Log In"
-      comeBackPage="/avatar-passport"
+      comeBackPage={getReturnRoute || '/'}
       submitAction="continue"
       submitHandler={submitHandler}>
-      <Input
-        type="tel"
-        label="Phone number"
-        height="45px"
-        style={{marginTop: '10px'}}
-        placeholder="+1 569 926 53 35"
-        value={phoneNumberControl.value}
-        isValid={phoneNumberControl.isValid}
-        isTouched={phoneNumberControl.isTouched}
-        errorMessage={phoneNumberControl.errorMessage}
-        onChange={changeHandler}/>
+      <FieldWrapper>
+        <Label>What is your phone number? </Label>
+        <InputWrapper>
+          <PhoneInput
+            international
+            readOnly={!phoneNumberControl.value}
+            value={phoneNumberControl.value}
+            placeholder="Choose your country"
+            onChange={changeHandler}
+          />
+        </InputWrapper>
+        <ErrorMessage
+          isValid={phoneNumberControl.isValid}
+          isTouched={phoneNumberControl.isTouched}>
+          {phoneNumberControl.errorMessage}</ErrorMessage>
+      </FieldWrapper>
     </AuthLayout>
   )
 }

@@ -1,13 +1,24 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import {Input} from 'components/UI'
 import {AuthLayout} from 'layouts'
 import {secondLevelOfRegistration} from 'assets'
 import {checkValidity} from 'utils'
 
 const Name = (props) => {
+  const registrationData = JSON.parse(localStorage.getItem('registrationData'))
   const [isFormValid, setIsFormValid] = useState(false)
+
+  const getDefaultNameValue = useMemo(() => {
+    const localRegistrationData = JSON.parse(localStorage.getItem('registrationData'))
+    if (localRegistrationData.name) {
+      return localRegistrationData.name
+    } else {
+      return ''
+    }
+  }, [])
+
   const [nameControl, setNameControl] = useState({
-    value: '',
+    value: getDefaultNameValue,
     isValid: false,
     isTouched: false,
     errorMessage: 'Fill in the field',
@@ -18,15 +29,10 @@ const Name = (props) => {
   })
 
   useEffect(() => {
-    const registrationData = JSON.parse(localStorage.getItem('registrationData'))
     if (!registrationData) {
       props.history.push('/phone-number')
-    } else if (registrationData.name) {
-      const field = {...nameControl}
-      field.value = registrationData.name
-      setNameControl(field)
     }
-  }, [nameControl, props.history])
+  }, [props.history, registrationData])
 
   const changeHandler = (event) => {
     const control = {...nameControl}
