@@ -1,4 +1,5 @@
 import React, {useEffect, useMemo} from 'react'
+import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {SideBar, PostItem, CardsFiltersForm} from 'components'
 import {SideDrawer} from 'components/UI'
@@ -47,6 +48,8 @@ import {
 } from './style'
 
 const ItemsTravellersList = (props) => {
+  const history = useHistory()
+
   useEffect(() => {
     localStorage.setItem('return-route', '/item-travellers-list')
   }, [])
@@ -121,7 +124,7 @@ const ItemsTravellersList = (props) => {
           <ChatLinkImg src={chatIcon} alt=""/>
           <ChatLinkLabel>Chat</ChatLinkLabel>
         </ChatLinkWrapper>
-        <MakeVideoButton>
+        <MakeVideoButton onClick={() => history.push('/make-video')}>
           <MakeVideoImg src={addNewOfferPlusIcon}/>
         </MakeVideoButton>
         <div style={{width: '35px'}}/>

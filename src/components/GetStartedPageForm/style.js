@@ -122,6 +122,7 @@ export const PhoneNumberInputWrapper = styled.div`
   border: 1px solid #C6D2DE;
   box-sizing: border-box;
   border-radius: 8px;
+  position: relative;
   
   :nth-child(2) {
     input {

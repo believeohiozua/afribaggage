@@ -1,0 +1,19 @@
+.PhoneInputCountrySelect {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+}
+
+.PhoneInputCountry {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  /*z-index: -1;*/
+}
+
+.PhoneInputInput {
+  /*display: none;*/
+}

@@ -1,6 +1,12 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import {GetStartedPage, ItemsTravellersList, CardInfoPage} from 'pages'
+
+import {
+  GetStartedPage,
+  ItemsTravellersList,
+  CardInfoPage,
+  MakeOfferVideoPage
+} from 'pages'
 
 import {
   PhoneNumber as LoginPhoneNumber,
@@ -21,6 +27,7 @@ import 'fonts.css'
 const App = () => {
   return (
     <Switch>
+      <Route path="/make-video" component={MakeOfferVideoPage}/>
       <Route path="/card-info" component={CardInfoPage}/>
       <Route path="/item-travellers-list" component={ItemsTravellersList}/>
       <Route path="/login-phone-number-verification" component={LoginPhoneNumberVerification}/>

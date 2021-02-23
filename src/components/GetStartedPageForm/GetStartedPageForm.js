@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
@@ -56,6 +56,11 @@ const GetStartedPageForm = () => {
     }
   })
 
+  useEffect(() => {
+    const select = document.querySelector('.PhoneInputCountrySelect')
+    console.log(select)
+  }, [])
+
   const changeHandler = (event) => {
     const fields = {...controls}
     const name = event && event.target ? event.target.name : 'phoneNumber'
@@ -111,9 +116,6 @@ const GetStartedPageForm = () => {
     } else {
       fields.phoneNumber.isValid = fields.phoneNumber.value ? fields.phoneNumber.value.length !== 0 : false
       fields.phoneNumber.isTouched = true
-
-      console.log('fields.phoneNumber.isValid', fields.phoneNumber.isValid)
-      console.log('fields.phoneNumber.isTouched', fields.phoneNumber.isTouched)
     }
 
     setControls(fields)
